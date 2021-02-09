@@ -86,6 +86,7 @@ public class MousePaintListener implements MouseInputListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		System.out.println("MouseReleased");
+		
 
 	}
 
