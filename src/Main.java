@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -30,7 +31,7 @@ public class Main {
 
 		frame.setVisible(true);
 
-		Graphics g = frame.getGraphics();
+		Graphics2D g = (Graphics2D) frame.getGraphics();
 		Mode mode = new Mode();
 		
 		MousePaintListener printListener = new MousePaintListener(frame,g,mode);

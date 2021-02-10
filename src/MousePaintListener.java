@@ -103,9 +103,6 @@ public class MousePaintListener implements MouseInputListener {
 		}
 		mpoint = e.getPoint();
 		
-		
-		
-		
 	}
 
 	@Override

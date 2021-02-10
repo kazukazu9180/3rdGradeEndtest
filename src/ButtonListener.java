@@ -1,40 +1,38 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class ButtonListener implements ActionListener {
-	private Graphics g;
+	private Graphics2D g;
 	private Mode mode;
 	
-	public ButtonListener(Graphics g,Mode mode) {
+	public ButtonListener(Graphics2D g,Mode mode) {
 		this.g = g;
 		this.mode = mode;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton b = (JButton)e.getSource();
+		JMenuItem m = (JMenuItem)e.getSource();
 
-		if(b.getText().compareTo("RED") == 0) {
-			setColor(0);
-		}else if(b.getText().compareTo("BLACK") == 0){
-			setColor(1);
-		}else if(b.getText().compareTo("LINE") == 0) {
-			mode.setMode(1);
-		}else if(b.getText().compareTo("TRIANGLE") == 0) {
-			mode.setMode(2);
+		if(m.getText().compareTo("ç◊Ç¢") == 0) {
+			lineWeight(1);
+		}else if(m.getText().compareTo("ëæÇ¢") == 0){
+			lineWeight(6);
+		}else if(m.getText().compareTo("ïÅí ") == 0) {
+			lineWeight(3);
 		}
 	}
 	
-	public void setColor(int n) {
-		if(n==0) {
-			g.setColor(new Color(255,0,0));
-		}else if(n==1) {
-			g.setColor(new Color(0,0,0));
-		}
+	public void lineWeight(int n) {
+		g.setStroke(new BasicStroke(n));
 	}
 
 }
