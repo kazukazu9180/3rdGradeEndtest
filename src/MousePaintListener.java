@@ -19,7 +19,6 @@ public class MousePaintListener implements MouseInputListener {
 	private JComboBox tool;
 	private int count;
 	private int x[],y[];
-	private Mode mode;
 	private int x1,y1,x2,y2;
 	private Point mpoint = null;
 	private Point spoint = null;

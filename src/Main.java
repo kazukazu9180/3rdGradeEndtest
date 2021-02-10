@@ -22,6 +22,13 @@ public class Main {
 		menubar.add(colorMenu);
 		menubar.add(weightMenu);
 		
+		//colorMenu
+		JMenuItem lineColor = new JMenuItem("ÉyÉìêFÇÃê›íË");
+		JMenuItem backgroundColor = new JMenuItem("îwåiêFÇÃê›íË");
+		
+		colorMenu.add(lineColor);
+		colorMenu.add(backgroundColor);
+		
 		//LineWeight
 		JMenuItem thin = new JMenuItem("ç◊Ç¢");
 		JMenuItem medium = new JMenuItem("ïÅí ");
@@ -45,43 +52,35 @@ public class Main {
 		
 		//Label
 		JLabel toolInfo = new JLabel("TOOLS");
-		toolInfo.setBounds(5,5,60,30);
+		toolInfo.setBounds(5,5,100,30);
 		infoPanel.add(toolInfo);
 		
-		
 		//toolCombo
-		String[] toolList = {"Pen","STRAIGHT","TRIANGLE"};
+		String[] toolList = {"PEN","STRAIGHT","TRIANGLE"};
 		JComboBox tool = new JComboBox(toolList);
 		tool.setBounds(50,5,80,30);
 		infoPanel.add(tool);
+		
 		
 		frame.add(paintPanel);
 		frame.add(infoPanel);
 		frame.setVisible(true);
 
-		Graphics2D g = (Graphics2D) frame.getGraphics();
-		Mode mode = new Mode();
+		Graphics2D g = (Graphics2D) paintPanel.getGraphics();
 		
 		MousePaintListener printListener = new MousePaintListener(frame,g,tool);
-		frame.addMouseListener(printListener);
-		frame.addMouseMotionListener(printListener);
+		paintPanel.addMouseListener(printListener);
+		paintPanel.addMouseMotionListener(printListener);
 		
-		ButtonListener buttonListener = new ButtonListener(g,mode);
+		ButtonListener buttonListener = new ButtonListener(g);
 		thin.addActionListener(buttonListener);
 		medium.addActionListener(buttonListener);
 		thick.addActionListener(buttonListener);
 		colorMenu.addActionListener(buttonListener);
-	}
-}
-
-class Mode{
-	private int mode;
-	
-	public int getMode() {
-		return mode;
-	}
-	
-	public void setMode(int mode) {
-		this.mode = mode;
+		
+		SetcolorListener setcolorListener = new SetcolorListener(g,paintPanel);
+		lineColor.addActionListener(setcolorListener);
+		backgroundColor.addActionListener(setcolorListener);
+		
 	}
 }

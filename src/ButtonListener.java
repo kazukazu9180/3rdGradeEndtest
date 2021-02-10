@@ -11,11 +11,9 @@ import javax.swing.JMenuItem;
 
 public class ButtonListener implements ActionListener {
 	private Graphics2D g;
-	private Mode mode;
 	
-	public ButtonListener(Graphics2D g,Mode mode) {
+	public ButtonListener(Graphics2D g) {
 		this.g = g;
-		this.mode = mode;
 	}
 	
 	@Override
