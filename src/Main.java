@@ -25,9 +25,11 @@ public class Main {
 		//colorMenu
 		JMenuItem lineColor = new JMenuItem("ペン色の設定");
 		JMenuItem backgroundColor = new JMenuItem("背景色の設定");
+		JMenuItem reset = new JMenuItem("キャンパスをリセット");
 		
 		colorMenu.add(lineColor);
 		colorMenu.add(backgroundColor);
+		colorMenu.add(reset);
 		
 		//LineWeight
 		JMenuItem thin = new JMenuItem("細い");
@@ -56,7 +58,7 @@ public class Main {
 		infoPanel.add(toolInfo);
 		
 		//toolCombo
-		String[] toolList = {"PEN","STRAIGHT","TRIANGLE"};
+		String[] toolList = {"PEN","ERASER","STRAIGHT","TRIANGLE"};
 		JComboBox tool = new JComboBox(toolList);
 		tool.setBounds(50,5,80,30);
 		infoPanel.add(tool);
@@ -68,7 +70,7 @@ public class Main {
 
 		Graphics2D g = (Graphics2D) paintPanel.getGraphics();
 		
-		MousePaintListener printListener = new MousePaintListener(frame,g,tool);
+		MousePaintListener printListener = new MousePaintListener(frame,g,tool,paintPanel);
 		paintPanel.addMouseListener(printListener);
 		paintPanel.addMouseMotionListener(printListener);
 		
@@ -81,6 +83,7 @@ public class Main {
 		SetcolorListener setcolorListener = new SetcolorListener(g,paintPanel);
 		lineColor.addActionListener(setcolorListener);
 		backgroundColor.addActionListener(setcolorListener);
+		reset.addActionListener(setcolorListener);
 		
 	}
 }

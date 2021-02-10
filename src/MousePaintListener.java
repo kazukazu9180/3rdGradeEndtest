@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,18 +23,21 @@ public class MousePaintListener implements MouseInputListener {
 	private int x1,y1,x2,y2;
 	private Point mpoint = null;
 	private Point spoint = null;
+	private JPanel panel;
+	private Color pen;
 
-	public MousePaintListener(JFrame f,Graphics g,JComboBox tool) {
+	public MousePaintListener(JFrame f,Graphics g,JComboBox tool,JPanel panel) {
 		this.frame = frame;
 		this.g = (Graphics2D) g;
 		this.tool = tool;
+		this.panel = panel;
 		this.x = new int[3];
 		this.y = new int[3];
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(tool.getSelectedIndex() == 1) {
+		if(tool.getSelectedIndex() == 2) {
 			count++;
 			if(count == 1) {
 				x[0] = e.getX();
@@ -45,7 +49,7 @@ public class MousePaintListener implements MouseInputListener {
 				g.drawLine(x[0], y[0], x[1], y[1]);
 				count = 0;
 			}
-		}else if(tool.getSelectedIndex() == 2) {
+		}else if(tool.getSelectedIndex() == 3) {
 			count++;
 			if(count == 1) {
 				x[0] = e.getX();
@@ -94,6 +98,7 @@ public class MousePaintListener implements MouseInputListener {
 		System.out.println("MouseDragged");
 		
 		if(tool.getSelectedIndex() == 0) {
+			g.setColor(pen);
 			if(mpoint != null) {
 				spoint = e.getPoint();
 				g.drawLine(mpoint.x, mpoint.y, spoint.x, spoint.y);
@@ -102,6 +107,19 @@ public class MousePaintListener implements MouseInputListener {
 				mpoint.y = spoint.y;
 			}
 			mpoint = e.getPoint();
+			
+		}else if(tool.getSelectedIndex() == 1) {
+			Color background = panel.getBackground();
+			
+			if(background != g.getColor()) {
+				pen = g.getColor();
+			}
+			
+			g.setColor(background);
+			
+			mpoint = e.getPoint();
+			g.fillOval(mpoint.x, mpoint.y, 10, 10);
+			
 		}
 		
 	}

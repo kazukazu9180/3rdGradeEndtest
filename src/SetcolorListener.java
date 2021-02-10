@@ -15,6 +15,7 @@ public class SetcolorListener implements ActionListener{
 	public SetcolorListener(Graphics2D g, JPanel panel) {
 		this.g = g;
 		this.panel = panel;
+		this.backgroundColor = null;	
 	}
 	
 	@Override
@@ -28,6 +29,12 @@ public class SetcolorListener implements ActionListener{
 			backgroundColor = JColorChooser.showDialog(null, "背景色を選択", g.getColor());
 			panel.setBackground(backgroundColor);
 			//g.setColor(backgroundColor);
+		}else if(m.getText().compareTo("キャンパスをリセット") == 0) {
+			if(backgroundColor == null) {
+				panel.setBackground(Color.WHITE);
+			}else {
+				panel.setBackground(backgroundColor);
+			}
 		}
 		
 	}	
