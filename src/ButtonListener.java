@@ -19,13 +19,21 @@ public class ButtonListener implements ActionListener {
 		JButton b = (JButton)e.getSource();
 
 		if(b.getText().compareTo("RED") == 0) {
-			g.setColor(new Color(255,0,0));
+			setColor(0);
 		}else if(b.getText().compareTo("BLACK") == 0){
-			g.setColor(new Color(0,0,0));
+			setColor(1);
 		}else if(b.getText().compareTo("LINE") == 0) {
 			mode.setMode(1);
 		}else if(b.getText().compareTo("TRIANGLE") == 0) {
 			mode.setMode(2);
+		}
+	}
+	
+	public void setColor(int n) {
+		if(n==0) {
+			g.setColor(new Color(255,0,0));
+		}else if(n==1) {
+			g.setColor(new Color(0,0,0));
 		}
 	}
 

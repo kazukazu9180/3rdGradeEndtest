@@ -5,32 +5,28 @@ import javax.swing.border.LineBorder;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("„Éö„Ç§„É≥„Éà");
-		frame.setSize(500,500);
+		JFrame frame = new JFrame("PEINT");
+		frame.setSize(1000,1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setResizable(false);
 		
-
-		JButton redButton = new JButton("RED");
-		redButton.setSize(200,28);
-		redButton.setLocation(10,10);
-		frame.add(redButton);
-
-		JButton blackButton = new JButton("BLACK");
-		blackButton.setSize(200,28);
-		blackButton.setLocation(230,10);
-		frame.add(blackButton);
+		//MenuBar
+		JMenuBar menubar = new JMenuBar();
+		JMenu colorMenu = new JMenu("êFÇÃëIë");
+		JMenu weightMenu = new JMenu("ê¸ÇÃëæÇ≥");
+		menubar.add(colorMenu);
+		menubar.add(weightMenu);
 		
-		JButton lineButton = new JButton("LINE");
-		lineButton.setSize(200,28);
-		lineButton.setLocation(10,40);
-		frame.add(lineButton);
+		//LineWeight
+		JMenuItem thin = new JMenuItem("ç◊Ç¢");
+		JMenuItem medium = new JMenuItem("ïÅí ");
+		JMenuItem thick = new JMenuItem("ëæÇ¢");
 		
-		JButton triangleButton = new JButton("TRIANGLE");
-		triangleButton.setSize(200,28);
-		triangleButton.setLocation(230,40);
-		frame.add(triangleButton);
+		weightMenu.add(thin);
+		weightMenu.add(medium);
+		weightMenu.add(thick);
+		frame.setJMenuBar(menubar);
 
 		frame.setVisible(true);
 
@@ -42,10 +38,10 @@ public class Main {
 		frame.addMouseMotionListener(printListener);
 		
 		ButtonListener buttonListener = new ButtonListener(g,mode);
-		redButton.addActionListener(buttonListener);
-		blackButton.addActionListener(buttonListener);
-		lineButton.addActionListener(buttonListener);
-		triangleButton.addActionListener(buttonListener);
+		thin.addActionListener(buttonListener);
+		medium.addActionListener(buttonListener);
+		thick.addActionListener(buttonListener);
+		colorMenu.addActionListener(buttonListener);
 	}
 }
 

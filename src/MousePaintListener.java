@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
@@ -18,10 +19,12 @@ public class MousePaintListener implements MouseInputListener {
 	private int x[],y[];
 	private Mode mode;
 	private int x1,y1,x2,y2;
+	private Point mpoint = null;
+	private Point spoint = null;
 
 	public MousePaintListener(JFrame f,Graphics g,Mode mode) {
 		this.frame = frame;
-		this.g = g;
+		this.g = (Graphics2D) g;
 		this.mode = mode;
 		this.x = new int[3];
 		this.y = new int[3];
@@ -77,10 +80,7 @@ public class MousePaintListener implements MouseInputListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		System.out.println("MousePressed");
-		
-		x1 = e.getX();
-		y1 = e.getY();
-
+		mpoint = null;
 	}
 
 	@Override
@@ -94,19 +94,16 @@ public class MousePaintListener implements MouseInputListener {
 	public void mouseDragged(MouseEvent e) {
 		System.out.println("MouseDragged");
 		
-		x2 = e.getX();
-		y2 = e.getY();
-		
-		((Graphics2D) g).setStroke(new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-		
-		if(Math.hypot(x2-x1, y2-y1) > 1) {
-			g.drawLine(x1, y1, x2, y2);
-		}else {
-			g.drawLine(x2, y2, x1, y1);
+		if(mpoint != null) {
+			spoint = e.getPoint();
+			g.drawLine(mpoint.x, mpoint.y, spoint.x, spoint.y);
+			
+			mpoint.x = spoint.x;
+			mpoint.y = spoint.y;
 		}
+		mpoint = e.getPoint();
 		
-		x1 = x2;
-		y1 = y2;
+		
 		
 		
 	}
