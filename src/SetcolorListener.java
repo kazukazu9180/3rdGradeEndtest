@@ -22,19 +22,12 @@ public class SetcolorListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem m = (JMenuItem)e.getSource();
 
-		if(m.getText().compareTo("ƒyƒ“F‚Ìİ’è") == 0) {
-			Color penColor = JColorChooser.showDialog(null, "ƒyƒ“F‚ğ‘I‘ğ", g.getColor());
+		if(m.getText().compareTo("ãƒšãƒ³è‰²ã®è¨­å®š") == 0) {
+			Color penColor = JColorChooser.showDialog(null, "ãƒšãƒ³è‰²ã‚’é¸æŠ", g.getColor());
 			g.setColor(penColor);
-		}else if(m.getText().compareTo("”wŒiF‚Ìİ’è") == 0){
-			backgroundColor = JColorChooser.showDialog(null, "”wŒiF‚ğ‘I‘ğ", g.getColor());
+		}else if(m.getText().compareTo("èƒŒæ™¯è‰²ã®è¨­å®š") == 0){
+			backgroundColor = JColorChooser.showDialog(null, "èƒŒæ™¯è‰²ã®è¨­å®š", g.getColor());
 			panel.setBackground(backgroundColor);
-			//g.setColor(backgroundColor);
-		}else if(m.getText().compareTo("ƒLƒƒƒ“ƒpƒX‚ğƒŠƒZƒbƒg") == 0) {
-			if(backgroundColor == null) {
-				panel.setBackground(Color.WHITE);
-			}else {
-				panel.setBackground(backgroundColor);
-			}
 		}
 		
 	}	

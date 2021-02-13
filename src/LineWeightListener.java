@@ -9,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-public class ButtonListener implements ActionListener {
+public class LineWeightListener implements ActionListener {
 	private Graphics2D g;
 	
-	public ButtonListener(Graphics2D g) {
+	public LineWeightListener(Graphics2D g) {
 		this.g = g;
 	}
 	
@@ -20,11 +20,11 @@ public class ButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem m = (JMenuItem)e.getSource();
 
-		if(m.getText().compareTo("×‚¢") == 0) {
+		if(m.getText().compareTo("ç´°ã„") == 0) {
 			lineWeight(1);
-		}else if(m.getText().compareTo("‘¾‚¢") == 0){
+		}else if(m.getText().compareTo("å¤ªã„") == 0){
 			lineWeight(6);
-		}else if(m.getText().compareTo("•’Ê") == 0) {
+		}else if(m.getText().compareTo("æ™®é€š") == 0) {
 			lineWeight(3);
 		}
 	}

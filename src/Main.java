@@ -9,32 +9,30 @@ import javax.swing.border.LineBorder;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("PEINT");
-		frame.setSize(500,500);
+		JFrame frame = new JFrame("PAINT");
+		frame.setSize(800,800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setResizable(false);
 		
 		//MenuBar
 		JMenuBar menubar = new JMenuBar();
-		JMenu colorMenu = new JMenu("F‚Ì‘I‘ğ");
-		JMenu weightMenu = new JMenu("ü‚Ì‘¾‚³");
+		JMenu colorMenu = new JMenu("è‰²ã®é¸æŠ");
+		JMenu weightMenu = new JMenu("ç·šã®å¤ªã•");
 		menubar.add(colorMenu);
 		menubar.add(weightMenu);
 		
 		//colorMenu
-		JMenuItem lineColor = new JMenuItem("ƒyƒ“F‚Ìİ’è");
-		JMenuItem backgroundColor = new JMenuItem("”wŒiF‚Ìİ’è");
-		JMenuItem reset = new JMenuItem("ƒLƒƒƒ“ƒpƒX‚ğƒŠƒZƒbƒg");
+		JMenuItem lineColor = new JMenuItem("ãƒšãƒ³è‰²ã®è¨­å®š");
+		JMenuItem backgroundColor = new JMenuItem("èƒŒæ™¯è‰²ã®è¨­å®š");
 		
 		colorMenu.add(lineColor);
 		colorMenu.add(backgroundColor);
-		colorMenu.add(reset);
 		
 		//LineWeight
-		JMenuItem thin = new JMenuItem("×‚¢");
-		JMenuItem medium = new JMenuItem("•’Ê");
-		JMenuItem thick = new JMenuItem("‘¾‚¢");
+		JMenuItem thin = new JMenuItem("ç´°ã„");
+		JMenuItem medium = new JMenuItem("æ™®é€š");
+		JMenuItem thick = new JMenuItem("å¤ªã„");
 		
 		weightMenu.add(thin);
 		weightMenu.add(medium);
@@ -45,24 +43,44 @@ public class Main {
 		JPanel paintPanel = new JPanel();
 		paintPanel.setBackground(Color.WHITE);
 		paintPanel.setLayout(null);
-		paintPanel.setBounds(0,40,500,500);
+		paintPanel.setBounds(0,40,800,800);
 		
 		//informationPanel
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(null);
-		infoPanel.setBounds(0,0,500,40);
+		infoPanel.setBounds(0,0,800,40);
 		
 		//Label
 		JLabel toolInfo = new JLabel("TOOLS");
 		toolInfo.setBounds(5,5,100,30);
 		infoPanel.add(toolInfo);
 		
+		JLabel stampInfo = new JLabel("STAMPS");
+		stampInfo.setBounds(180,5,100,30);
+		infoPanel.add(stampInfo);
+		
+		JLabel textInfo = new JLabel("TEXT");
+		textInfo.setBounds(345,5,100,30);
+		infoPanel.add(textInfo);
+		
 		//toolCombo
-		String[] toolList = {"PEN","ERASER","STRAIGHT","TRIANGLE"};
+		String[] toolList = {"PEN","RAINBOW PEN","ERASER","STRAIGHT","TRIANGLE","STAMP","TEXT STAMP"};
 		JComboBox tool = new JComboBox(toolList);
-		tool.setBounds(50,5,80,30);
+		tool.setBounds(50,5,120,30);
 		infoPanel.add(tool);
 		
+		//stampCombo
+		String[] stampList = {"SQUARE","TRIANGLE","CIRCLE","STAR"};
+		JComboBox stamp = new JComboBox(stampList);
+		stamp.setBounds(233,5,100,30);
+		infoPanel.add(stamp);
+		stamp.setEnabled(false);
+		
+		//TextField
+		JTextField text = new JTextField(10);
+		text.setBounds(378,5,150,30);
+		infoPanel.add(text);
+		text.setEnabled(false);
 		
 		frame.add(paintPanel);
 		frame.add(infoPanel);
@@ -70,20 +88,22 @@ public class Main {
 
 		Graphics2D g = (Graphics2D) paintPanel.getGraphics();
 		
-		MousePaintListener printListener = new MousePaintListener(frame,g,tool,paintPanel);
+		MousePaintListener printListener = new MousePaintListener(frame,g,tool,stamp,paintPanel,text);
 		paintPanel.addMouseListener(printListener);
 		paintPanel.addMouseMotionListener(printListener);
 		
-		ButtonListener buttonListener = new ButtonListener(g);
-		thin.addActionListener(buttonListener);
-		medium.addActionListener(buttonListener);
-		thick.addActionListener(buttonListener);
-		colorMenu.addActionListener(buttonListener);
+		LineWeightListener lineweightListener = new LineWeightListener(g);
+		thin.addActionListener(lineweightListener);
+		medium.addActionListener(lineweightListener);
+		thick.addActionListener(lineweightListener);
+		colorMenu.addActionListener(lineweightListener);
 		
 		SetcolorListener setcolorListener = new SetcolorListener(g,paintPanel);
 		lineColor.addActionListener(setcolorListener);
 		backgroundColor.addActionListener(setcolorListener);
-		reset.addActionListener(setcolorListener);
+		
+		ToolListener toolListener = new ToolListener(tool,stamp,text);
+		tool.addActionListener(toolListener);
 		
 	}
 }
